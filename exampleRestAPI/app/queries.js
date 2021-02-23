@@ -1,11 +1,13 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'androidApp',
-  password: '030398',
+  user: 'whwnxgibpnawbv',
+  host: 'ec2-100-24-139-146.compute-1.amazonaws.com',
+  database: 'd9q6p8qt0mm81j',
+  password: '204e680a2816a9d73e5df80c1afe9c1cfb3f9a594a0749f8c5807de3a4eaaf03',
   port: 5432,
-  poolSize: 1,
+  ssl: {
+    rejectUnauthorized: false
+  }
 })
 
 const logIn = (request, response) => {
