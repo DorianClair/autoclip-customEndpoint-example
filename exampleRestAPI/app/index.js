@@ -18,4 +18,4 @@ app.get('/user', jsonParser, db.getQuestionsByUserId);
 app.get('/login', jsonParser, db.logIn);
 
 app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+	() => console.log("Server is running on: " + process.env.PORT));
