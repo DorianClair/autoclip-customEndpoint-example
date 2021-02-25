@@ -23,7 +23,7 @@ const logIn = (request, response) => {
         throw error
       }
       let passToComp;
-      if(results.rows[0].pass != undefined){
+      if(results.rows != undefined){
         passToComp = results.rows[0].pass;
       } else{
         passToComp = "failedPass"
