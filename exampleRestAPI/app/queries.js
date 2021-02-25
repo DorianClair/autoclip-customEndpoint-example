@@ -105,7 +105,7 @@ function thenAddQuestions(questions, assignees, id) {
     })
 
     assignees.forEach((assignee) => {
-        pool.query('INSERT INTO assignedForm (form_id, user_id) VALUES ($1, $2)', [id, assignee.id], (error, results) => {
+        pool.query('INSERT INTO assignedforms (form_id, user_id) VALUES ($1, $2)', [id, assignee.id], (error, results) => {
             if (error) {
               throw error
             }
