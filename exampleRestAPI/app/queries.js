@@ -22,7 +22,12 @@ const logIn = (request, response) => {
       if (error) {
         throw error
       }
-      
+      let passToComp;
+      if(results.rows[0].pass != undefined){
+        passToComp = results.rows[0].pass;
+      } else{
+        passToComp = "failedPass"
+      }
       bcrypt.compare(password, results.rows[0].pass ? results.rows[0].pass : null , function(err, result) {
         if(result == true){
           console.log("sucessful login")
