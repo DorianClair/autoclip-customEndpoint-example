@@ -28,7 +28,7 @@ const logIn = (request, response) => {
       } else{
         passToComp = "failedPass"
       }
-      bcrypt.compare(password, results.rows[0].pass ? results.rows[0].pass : null , function(err, result) {
+      bcrypt.compare(password, passToComp , function(err, result) {
         if(result == true){
           console.log("sucessful login")
           //console.log(results)
