@@ -86,7 +86,7 @@ const getQuestionsByFormId = (request, response) =>  {
 const getUsersByManagerId = (request, response) =>  {
   console.log("managerId: " + request.query.managerId);
   const managerId = request.query.managerId;
-  pool.query('select name, email, phone, manager_id from users WHERE manager_id = $1',[managerId], (error, results) => {
+  pool.query('select id, name, email, phone, manager_id from users WHERE manager_id = $1',[managerId], (error, results) => {
     if (error) {
       throw error
     }
@@ -98,7 +98,7 @@ const getUsersByManagerId = (request, response) =>  {
 const getManagerById = (request, response) =>  {
   console.log("managerId: " + request.query.managerId);
   const managerId = request.query.managerId;
-  pool.query('select name, email, phone from managers WHERE id = $1',[managerId], (error, results) => {
+  pool.query('select id, name, email, phone from managers WHERE id = $1',[managerId], (error, results) => {
     if (error) {
       throw error
     }
@@ -109,7 +109,7 @@ const getManagerById = (request, response) =>  {
 const getUserById = (request, response) =>  {
   console.log("userId: " + request.query.userId);
   const userId = request.query.userId;
-  pool.query('select name, email, phone, manager_id from users WHERE id = $1',[userId], (error, results) => {
+  pool.query('select id, name, email, phone, manager_id from users WHERE id = $1',[userId], (error, results) => {
     if (error) {
       throw error
     }
