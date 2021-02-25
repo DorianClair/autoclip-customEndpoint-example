@@ -72,6 +72,53 @@ const getQuestionsByUserId = (request, response) =>  {
     })
 }
 
+const getQuestionsByFormId = (request, response) =>  {
+  console.log("formId: " + request.query.formId);
+  const formId = request.query.formId;
+  pool.query('SELECT DISTINCT title from questions Inner join forms on questions.form_id = forms.id Where form_id = $2',[formId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getUsersByManagerId = (request, response) =>  {
+  console.log("managerId: " + request.query.managerId);
+  const managerId = request.query.managerId;
+  pool.query('select name, email, phone, manager_id from users WHERE manager_id = $1',[managerId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    delete results.rows[0].pass
+    response.status(200).json(results.rows)
+  })
+}
+
+const getManagerById = (request, response) =>  {
+  console.log("managerId: " + request.query.managerId);
+  const managerId = request.query.managerId;
+  pool.query('select name, email, phone from managers WHERE id = $1',[managerId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getUserById = (request, response) =>  {
+  console.log("userId: " + request.query.userId);
+  const userId = request.query.userId;
+  pool.query('select name, email, phone, manager_id from users WHERE id = $1',[userId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+
+
 const createUser = (request, response) => {
     console.log(request.body)
     const {name, email, pass, managerId, phone } = request.body
@@ -157,5 +204,9 @@ module.exports = {
     createManager,
     createForm,
     getQuestionsByUserId,
+    getQuestionsByFormId,
+    getUsersByManagerId,
+    getManagerById,
+    getUserById,
     logIn,
   }

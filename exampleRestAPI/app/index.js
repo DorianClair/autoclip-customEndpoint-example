@@ -10,12 +10,15 @@ const port = 3000;
 // create application/json parser
 var jsonParser = bodyParser.json()
 
-app.get('/users', db.getUsers);
 app.post('/user', jsonParser, db.createUser);
+app.get('/user', jsonParser, db.getUserById)
 app.post('/manager', jsonParser, db.createManager);
+app.get('/manager', jsonParser, db.getManagerById)
 app.post('/form', jsonParser, db.createForm);
-app.get('/user', jsonParser, db.getQuestionsByUserId);
+app.get('/allquestions', jsonParser, db.getQuestionsByUserId);
 app.get('/login', jsonParser, db.logIn);
+app.get('/questions', jsonParser, db.getQuestionsByFormId);
+app.get('/users', jsonParser, db.getUsersByManagerId)
 
 app.listen(process.env.PORT || 3000, 
 	() => console.log("Server is running on: " + process.env.PORT));
