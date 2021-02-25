@@ -10,10 +10,11 @@ const port = 3000;
 // create application/json parser
 var jsonParser = bodyParser.json()
 
-app.post('/user', jsonParser, db.createUser);
-app.get('/user', jsonParser, db.getUserById)
 app.post('/manager', jsonParser, db.createManager);
 app.get('/manager', jsonParser, db.getManagerById)
+
+app.post('/user', jsonParser, db.createUser);
+app.get('/user', jsonParser, db.getUserById)
 app.post('/form', jsonParser, db.createForm);
 app.get('/allquestions', jsonParser, db.getQuestionsByUserId);
 app.get('/login', jsonParser, db.logIn);

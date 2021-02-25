@@ -75,7 +75,7 @@ const getQuestionsByUserId = (request, response) =>  {
 const getQuestionsByFormId = (request, response) =>  {
   console.log("formId: " + request.query.formId);
   const formId = request.query.formId;
-  pool.query('SELECT DISTINCT title from questions Inner join forms on questions.form_id = forms.id Where form_id = $2',[formId], (error, results) => {
+  pool.query('SELECT DISTINCT title from questions Inner join forms on questions.form_id = forms.id Where form_id = $1',[formId], (error, results) => {
     if (error) {
       throw error
     }
