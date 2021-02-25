@@ -1,3 +1,9 @@
+drop table forms;
+drop table managers;
+drop table questions;
+drop table users;
+drop table assignedforms;
+
 CREATE TABLE managers (
   ID SERIAL PRIMARY KEY,
   name VARCHAR(255),
@@ -35,3 +41,4 @@ CREATE TABLE questions (
   form_id integer,
   title VARCHAR(255)
 );
+
