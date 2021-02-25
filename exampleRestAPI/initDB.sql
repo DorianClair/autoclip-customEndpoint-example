@@ -1,21 +1,23 @@
 CREATE TABLE managers (
   ID SERIAL PRIMARY KEY,
-  name VARCHAR(30),
-  email VARCHAR(30),
-  pass VARCHAR(30),
-  type VARCHAR(30) DEFAULT 'manager'
+  name VARCHAR(255),
+  email VARCHAR(255),
+  pass VARCHAR(255),
+  phone VARCHAR(255),
+  type VARCHAR(255) DEFAULT 'manager'
 );
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
-  name VARCHAR(30),
-  email VARCHAR(30),
-  pass VARCHAR(30),
+  name VARCHAR(255),
+  email VARCHAR(255),
+  pass VARCHAR(255),
+  phone VARCHAR(255),
   manager_id integer,
-  type VARCHAR(30) DEFAULT 'USER'
+  type VARCHAR(255) DEFAULT 'USER'
 );
 
-CREATE TABLE assignedForms (
+CREATE TABLE assignedforms (
   ID SERIAL PRIMARY KEY,
   form_id integer,
   user_id integer
@@ -23,7 +25,8 @@ CREATE TABLE assignedForms (
 
 CREATE TABLE forms (
   ID SERIAL PRIMARY KEY,
-  name VARCHAR(30),
+  name VARCHAR(255),
+  description VARCHAR(255),
   manager_id integer
 );
 
