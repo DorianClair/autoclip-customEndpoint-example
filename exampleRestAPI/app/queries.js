@@ -34,7 +34,7 @@ const getUsers = (request, response) => {
 const getQuestionsByUserId = (request, response) =>  {
     console.log("userId: " + request.query.userId);
     const userId = request.query.userId;
-    pool.query('SELECT DISTINCT title, name from questions Inner join forms on questions.form_id = forms.id inner join assignedForm on forms.id = assignedForm.form_id Where user_id = $1',[userId], (error, results) => {
+    pool.query('SELECT DISTINCT title, name from questions Inner join forms on questions.form_id = forms.id inner join assignedforms on forms.id = assignedforms.form_id Where user_id = $1',[userId], (error, results) => {
       if (error) {
         throw error
       }
