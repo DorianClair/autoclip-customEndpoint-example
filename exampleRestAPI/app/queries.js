@@ -74,7 +74,7 @@ const getQuestionsByUserId = (request, response) =>  {
 
 const getQuestionsByManagerId = (request, response) =>  {
   console.log("userId: " + request.query.managerId);
-  const userId = request.query.managerId;
+  const managerId = request.query.managerId;
   pool.query('SELECT DISTINCT title, name from questions Inner join forms on questions.form_id = forms.id inner join assignedforms on forms.id = assignedforms.form_id Where forms.managerId = $1',[managerId], (error, results) => {
     if (error) {
       throw error
