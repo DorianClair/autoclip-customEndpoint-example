@@ -12,7 +12,6 @@ var jsonParser = bodyParser.json()
 
 app.post('/manager', jsonParser, db.createManager);
 app.get('/manager', jsonParser, db.getManagerById)
-
 app.post('/user', jsonParser, db.createUser);
 app.get('/user', jsonParser, db.getUserById)
 app.post('/form', jsonParser, db.createForm);
