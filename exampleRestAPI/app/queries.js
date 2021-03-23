@@ -90,7 +90,7 @@ const getUsersByManagerId = (request, response) =>  {
     if (error) {
       throw error
     }
-    if(results.rows[0].pass){
+    if(results.rows){
       delete results.rows[0].pass
     }
     response.status(200).json(results.rows)
