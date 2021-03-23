@@ -72,6 +72,18 @@ const getQuestionsByUserId = (request, response) =>  {
     })
 }
 
+const getQuestionsByManagerId = (request, response) =>  {
+  console.log("userId: " + request.query.managerId);
+  const userId = request.query.managerId;
+  pool.query('SELECT DISTINCT title, name from questions Inner join forms on questions.form_id = forms.id inner join assignedforms on forms.id = assignedforms.form_id Where forms.managerId = $1',[managerId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+
 const getQuestionsByFormId = (request, response) =>  {
   console.log("formId: " + request.query.formId);
   const formId = request.query.formId;
@@ -207,6 +219,7 @@ module.exports = {
     createForm,
     getQuestionsByUserId,
     getQuestionsByFormId,
+    getQuestionsByManagerId,
     getUsersByManagerId,
     getManagerById,
     getUserById,
