@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const port = 3000;
 
 // create application/json parser
-//small change
+//small change 2
 var jsonParser = bodyParser.json()
 
 app.post('/manager', jsonParser, db.createManager);
