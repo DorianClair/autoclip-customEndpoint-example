@@ -56,7 +56,7 @@ const changePass = (request, response) => {
 
   const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
   const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
-  const { email, newpass } = request.body
+  const { email, newpass, type } = request.body
 
   pool.query('SELECT id, pass, type from users where email=$1 UNION SELECT managers.id, managers.pass, managers.type from managers WHERE managers.email=$1', [login], (error, results) => {
     if (error) {
@@ -75,13 +75,24 @@ const changePass = (request, response) => {
         bcrypt.hash(newpass, saltRounds, function(err, hash) {
           console.log("The new pass is: " + newpass);
           console.log("the new hash is: " + hash);
-          pool.query('UPDATE users set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
-            if (error) {
-              throw error
-            }
-            console.log(results)
-            response.status(201).send(`User password updated}`)
-          })
+          if(type === "manager") {
+            pool.query('UPDATE managers set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
+              if (error) {
+                throw error
+              }
+              console.log(results)
+              response.status(201).send(`User password updated}`)
+            })
+          } else {
+            pool.query('UPDATE users set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
+              if (error) {
+                throw error
+              }
+              console.log(results)
+              response.status(201).send(`User password updated}`)
+            })
+          }
+         
         });
       } else {
         let failReason = {
