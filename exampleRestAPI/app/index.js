@@ -19,7 +19,7 @@ app.post('/form', jsonParser, db.createForm);
 app.get('/allquestions', jsonParser, db.getQuestionsByUserId);
 app.get('/allquestionsbymanager', jsonParser, db.getQuestionsByManagerId);
 app.get('/login', jsonParser, db.logIn);
-app.get('/changepass', jsonParser, db.changePass);
+app.post('/changepass', jsonParser, db.changePass);
 app.get('/questions', jsonParser, db.getQuestionsByFormId);
 app.get('/users', jsonParser, db.getUsersByManagerId)
 

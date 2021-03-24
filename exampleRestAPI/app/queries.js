@@ -56,6 +56,7 @@ const changePass = (request, response) => {
 
   const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
   const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+  const { email, newpass } = request.body
 
   pool.query('SELECT id, pass, type from users where email=$1 UNION SELECT managers.id, managers.pass, managers.type from managers WHERE managers.email=$1', [login], (error, results) => {
     if (error) {
@@ -71,7 +72,7 @@ const changePass = (request, response) => {
       if(result == true){
         console.log("sucessful login, changing password")
         //console.log(results)
-        bcrypt.hash(pass, saltRounds, function(err, hash) {
+        bcrypt.hash(newpass, saltRounds, function(err, hash) {
           pool.query('UPDATE users set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
             if (error) {
               throw error
