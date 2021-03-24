@@ -78,7 +78,7 @@ const changePass = (request, response) => {
               throw error
             }
             console.log(results)
-            response.status(201).send(`User passeword updated with ID: ${results.rows[0].id}`)
+            response.status(201).send(`User password updated}`)
           })
         });
       } else {
