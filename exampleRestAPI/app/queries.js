@@ -81,11 +81,6 @@ const changePass = (request, response) => {
             response.status(201).send(`User passeword updated with ID: ${results.rows[0].id}`)
           })
         });
-        let toReturn = {
-          id: results.rows[0].id,
-          type:  results.rows[0].type
-        }
-        response.status(200).json(toReturn)
       } else {
         let failReason = {
           status: "404",
