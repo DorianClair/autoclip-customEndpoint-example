@@ -73,6 +73,8 @@ const changePass = (request, response) => {
         console.log("sucessful login, changing password")
         //console.log(results)
         bcrypt.hash(newpass, saltRounds, function(err, hash) {
+          console.log("The new pass is: " + newpass);
+          console.log("the new hash is: " + hash);
           pool.query('UPDATE users set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
             if (error) {
               throw error
