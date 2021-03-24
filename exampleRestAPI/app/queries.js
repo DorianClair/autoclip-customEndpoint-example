@@ -52,6 +52,54 @@ const logIn = (request, response) => {
     
 }
 
+const changePass = (request, response) => {
+
+  const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
+  const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+
+  pool.query('SELECT id, pass, type from users where email=$1 UNION SELECT managers.id, managers.pass, managers.type from managers WHERE managers.email=$1', [login], (error, results) => {
+    if (error) {
+      throw error
+    }
+    let passToComp;
+    if(results.rows[0] != undefined){
+      passToComp = results.rows[0].pass;
+    } else{
+      passToComp = "failedPass"
+    }
+    bcrypt.compare(password, passToComp , function(err, result) {
+      if(result == true){
+        console.log("sucessful login, changing password")
+        //console.log(results)
+        bcrypt.hash(pass, saltRounds, function(err, hash) {
+          pool.query('UPDATE users set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
+            if (error) {
+              throw error
+            }
+            console.log(results)
+            response.status(201).send(`User passeword updated with ID: ${results.rows[0].id}`)
+          })
+        });
+        let toReturn = {
+          id: results.rows[0].id,
+          type:  results.rows[0].type
+        }
+        response.status(200).json(toReturn)
+      } else {
+        let failReason = {
+          status: "404",
+          reason: "User does not exist or credentials are incorrect"
+        }
+        response.status(404).json(failReason)
+      }
+    });
+    console.log("failedLogin")
+    //console.log(results)
+    
+  })
+  
+}
+
 const getUsers = (request, response) => {
     pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
       if (error) {
@@ -223,5 +271,6 @@ module.exports = {
     getUsersByManagerId,
     getManagerById,
     getUserById,
+    changePass,
     logIn,
   }
