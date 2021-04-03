@@ -18,6 +18,8 @@ app.get('/user', jsonParser, db.getUserById)
 app.post('/form', jsonParser, db.createForm);
 app.get('/allquestions', jsonParser, db.getQuestionsByUserId);
 app.get('/allquestionsbymanager', jsonParser, db.getQuestionsByManagerId);
+app.get('/allformsbymanager', jsonParser, db.getFormsByManagerId);
+
 app.get('/login', jsonParser, db.logIn);
 app.post('/changepass', jsonParser, db.changePass);
 app.get('/questions', jsonParser, db.getQuestionsByFormId);

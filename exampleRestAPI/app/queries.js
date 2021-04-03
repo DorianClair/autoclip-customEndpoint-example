@@ -129,6 +129,16 @@ const getQuestionsByUserId = (request, response) =>  {
     })
 }
 
+const getFormsByManagerId = (request, response) =>  {
+  console.log("userId: " + request.query.managerId);
+  const managerId = request.query.managerId;
+  pool.query('SELECT name, description from forms Where manager_id = $1',[managerId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 const getQuestionsByManagerId = (request, response) =>  {
   console.log("userId: " + request.query.managerId);
   const managerId = request.query.managerId;
@@ -277,6 +287,7 @@ module.exports = {
     getQuestionsByUserId,
     getQuestionsByFormId,
     getQuestionsByManagerId,
+    getFormsByManagerId,
     getUsersByManagerId,
     getManagerById,
     getUserById,
