@@ -233,8 +233,8 @@ const createForm = (request, response) => {
 }
 
 function createNewForm(callback, request) {
-  const {name, managerId, questions, assignees } = request.body
-  pool.query('INSERT INTO forms (name, manager_id) VALUES ($1, $2) RETURNING id', [name, managerId], (error, results) => {
+  const {name, description, managerId, questions, assignees } = request.body
+  pool.query('INSERT INTO forms (name, manager_id, description) VALUES ($1, $2, $3) RETURNING id', [name, managerId, description], (error, results) => {
       if (error) {
         throw error
       }
