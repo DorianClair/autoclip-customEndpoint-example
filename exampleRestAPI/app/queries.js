@@ -130,7 +130,7 @@ const getQuestionsByUserId = (request, response) =>  {
 }
 
 const getFormsByManagerId = (request, response) =>  {
-  console.log("userId: " + request.query.managerId);
+  console.log("ManagerId: " + request.query.managerId);
   const managerId = request.query.managerId;
   pool.query('SELECT name, description from forms Where manager_id = $1',[managerId], (error, results) => {
     if (error) {
@@ -139,6 +139,18 @@ const getFormsByManagerId = (request, response) =>  {
     response.status(200).json(results.rows)
   })
 }
+
+const getFormsByUserId = (request, response) =>  {
+  console.log("userId: " + request.query.userId);
+  const userId = request.query.userId;
+  pool.query('select * from forms Inner join assignedforms on forms.id = assignedforms.form_id where user_id = $1',[userId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const getQuestionsByManagerId = (request, response) =>  {
   console.log("userId: " + request.query.managerId);
   const managerId = request.query.managerId;
@@ -236,7 +248,6 @@ const createManager = (request, response) => {
 
 const createForm = (request, response) => {
     console.log(request.body)
-
     let makeForm = (createNewForm(thenAddQuestions, request));
     console.log("makeForm: " + makeForm)
     response.status(201).send('Form created');
@@ -288,6 +299,7 @@ module.exports = {
     getQuestionsByFormId,
     getQuestionsByManagerId,
     getFormsByManagerId,
+    getFormsByUserId,
     getUsersByManagerId,
     getManagerById,
     getUserById,
