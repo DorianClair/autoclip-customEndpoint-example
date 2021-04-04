@@ -151,10 +151,10 @@ const getFormsByUserId = (request, response) =>  {
   })
 }
 
-const getQuestionsByManagerId = (request, response) =>  {
-  console.log("userId: " + request.query.managerId);
-  const managerId = request.query.managerId;
-  pool.query('SELECT DISTINCT title, name from questions Inner join forms on questions.form_id = forms.id inner join assignedforms on forms.id = assignedforms.form_id Where forms.manager_Id = $1',[managerId], (error, results) => {
+const getQuestionsByFormId = (request, response) =>  {
+  console.log("form: " + request.query.formId);
+  const formId = request.query.formId;
+  pool.query('select * from questions where questions.form_id = $1',[formId], (error, results) => {
     if (error) {
       throw error
     }
@@ -162,11 +162,10 @@ const getQuestionsByManagerId = (request, response) =>  {
   })
 }
 
-
-const getQuestionsByFormId = (request, response) =>  {
-  console.log("formId: " + request.query.formId);
-  const formId = request.query.formId;
-  pool.query('SELECT DISTINCT title from questions Inner join forms on questions.form_id = forms.id Where form_id = $1',[formId], (error, results) => {
+const getQuestionsByManagerId = (request, response) =>  {
+  console.log("userId: " + request.query.managerId);
+  const managerId = request.query.managerId;
+  pool.query('SELECT DISTINCT title, name from questions Inner join forms on questions.form_id = forms.id inner join assignedforms on forms.id = assignedforms.form_id Where forms.manager_Id = $1',[managerId], (error, results) => {
     if (error) {
       throw error
     }
