@@ -22,7 +22,7 @@ app.get('/allquestionsbymanager', jsonParser, db.getQuestionsByManagerId);
 app.get('/allformsbymanager', jsonParser, db.getFormsByManagerId);
 app.get('/allformsbyuser', jsonParser, db.getFormsByUserId);
 app.get('/allusersbyformid', jsonParser, db.getUsersByFormId);
-app.put('/updateform',  jsonParser, db.updateForm);
+app.post('/updateform',  jsonParser, db.updateForm);
 app.get('/login', jsonParser, db.logIn);
 app.post('/changepass', jsonParser, db.changePass);
 app.get('/questions', jsonParser, db.getQuestionsByFormId);
