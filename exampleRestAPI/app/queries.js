@@ -132,7 +132,7 @@ const getQuestionsByUserId = (request, response) =>  {
 const getFormsByManagerId = (request, response) =>  {
   console.log("ManagerId: " + request.query.managerId);
   const managerId = request.query.managerId;
-  pool.query('SELECT name, description from forms Where manager_id = $1',[managerId], (error, results) => {
+  pool.query('SELECT name, description, id from forms Where manager_id = $1',[managerId], (error, results) => {
     if (error) {
       throw error
     }
