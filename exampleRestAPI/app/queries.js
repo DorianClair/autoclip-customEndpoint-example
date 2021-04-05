@@ -271,6 +271,12 @@ const updateForm = (request, response) => {
   response.status(201).send('Form created');
 }
 
+const deleteForm = (request, response) => {
+  console.log(request.body)
+  let delForm = deleteOldForm(request);
+  response.status(204).send('Form deleted');
+}
+
 function deleteOldForm(request) {
   console.log("here is the request body in delete old form");
   console.log(request)
@@ -338,6 +344,7 @@ module.exports = {
     getFormsByManagerId,
     getFormsByUserId,
     updateForm,
+    deleteForm,
     getUsersByManagerId,
     getUsersByFormId,
     getManagerById,

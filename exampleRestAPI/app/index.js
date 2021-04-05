@@ -26,7 +26,8 @@ app.post('/updateform',  jsonParser, db.updateForm);
 app.get('/login', jsonParser, db.logIn);
 app.post('/changepass', jsonParser, db.changePass);
 app.get('/questions', jsonParser, db.getQuestionsByFormId);
-app.get('/users', jsonParser, db.getUsersByManagerId)
+app.delete('/deleteform', jsonParser, db.deleteForm)
+app.get('/users', jsonParser, db.getUsersByManagerId);
 
 app.listen(process.env.PORT || 3000, 
 	() => console.log("Server is running on: " + process.env.PORT));
