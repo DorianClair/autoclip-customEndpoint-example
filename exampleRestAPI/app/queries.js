@@ -252,7 +252,7 @@ const createManager = (request, response) => {
         response.status(201).send(`Manager added with ID: ${results.rows[0].id}`)
       })
   });
-
+}
   const submitAnswers = (request, response) => {
     console.log(request.body)
     const { formId, userId, answers } = request.body
@@ -365,4 +365,4 @@ module.exports = {
     changePass,
     submitAnswers,
     logIn
-}}
+}
