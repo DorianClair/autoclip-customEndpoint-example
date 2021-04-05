@@ -265,12 +265,13 @@ const createForm = (request, response) => {
 
 const updateForm = (request, response) => {
   console.log(request.body)
-  let makeForm = (deleteOldForm(createNewForm(thenAddQuestions, request), request), request);
+  let delForm = deleteOldForm(request);
+  let makeForm = (createNewForm(thenAddQuestions, request));
   console.log("makeForm: " + makeForm)
   response.status(201).send('Form created');
 }
 
-function deleteOldForm(callback, request) {
+function deleteOldForm(request) {
   console.log("here is the request body in delete old form");
   console.log(request)
   const { formId } = request.body
@@ -286,7 +287,6 @@ function deleteOldForm(callback, request) {
       throw error
     }
     console.log(results)
-    return callback(request)
   })
 }
 
