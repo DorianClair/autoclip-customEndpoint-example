@@ -271,7 +271,9 @@ const updateForm = (request, response) => {
 }
 
 function deleteOldForm(callback, request) {
-  const {formId } = request.body
+  console.log("here is the request body in delete old form");
+  console.log(request)
+  const { formId } = request.body
   pool.query('Delete from forms where id = $1', [formId], (error, results) => {
       if (error) {
         throw error
@@ -279,13 +281,13 @@ function deleteOldForm(callback, request) {
       console.log(results)
     })
 
-    pool.query('Delete from assignedforms where form_id = $1', [formId], (error, results) => {
-      if (error) {
-        throw error
-      }
-      console.log(results)
-      return callback(request)
-    })
+  pool.query('Delete from assignedforms where form_id = $1', [formId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    console.log(results)
+    return callback(request)
+  })
 }
 
 function createNewForm(callback, request) {
