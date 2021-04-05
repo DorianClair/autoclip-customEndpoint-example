@@ -16,12 +16,13 @@ app.get('/manager', jsonParser, db.getManagerById)
 app.post('/user', jsonParser, db.createUser);
 app.get('/user', jsonParser, db.getUserById)
 app.post('/form', jsonParser, db.createForm);
+app.post('/updateForm', jsonParser, db.updateForm);
 app.get('/allquestions', jsonParser, db.getQuestionsByUserId);
 app.get('/allquestionsbymanager', jsonParser, db.getQuestionsByManagerId);
 app.get('/allformsbymanager', jsonParser, db.getFormsByManagerId);
 app.get('/allformsbyuser', jsonParser, db.getFormsByUserId);
 app.get('/allusersbyformid', jsonParser, db.getUsersByFormId);
-
+app.put('/updateform',  jsonParser, db.updateForm);
 app.get('/login', jsonParser, db.logIn);
 app.post('/changepass', jsonParser, db.changePass);
 app.get('/questions', jsonParser, db.getQuestionsByFormId);

@@ -263,6 +263,31 @@ const createForm = (request, response) => {
     response.status(201).send('Form created');
 }
 
+const updateForm = (request, response) => {
+  console.log(request.body)
+  let makeForm = (deleteOldForm(createNewForm(thenAddQuestions, request)));
+  console.log("makeForm: " + makeForm)
+  response.status(201).send('Form created');
+}
+
+function deleteOldForm(callback, request) {
+  const {formId } = request.body
+  pool.query('Delete from forms where id = $1', [formId], (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log(results)
+    })
+
+    pool.query('Delete from assignedforms where form_id = $1', [formId], (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log(results)
+      return callback()
+    })
+}
+
 function createNewForm(callback, request) {
   const {name, description, managerId, questions, assignees } = request.body
   pool.query('INSERT INTO forms (name, manager_id, description) VALUES ($1, $2, $3) RETURNING id', [name, managerId, description], (error, results) => {
@@ -310,6 +335,7 @@ module.exports = {
     getQuestionsByManagerId,
     getFormsByManagerId,
     getFormsByUserId,
+    updateForm,
     getUsersByManagerId,
     getUsersByFormId,
     getManagerById,
