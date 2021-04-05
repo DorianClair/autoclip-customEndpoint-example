@@ -284,7 +284,7 @@ function deleteOldForm(callback, request) {
         throw error
       }
       console.log(results)
-      return callback()
+      return callback(request)
     })
 }
 
