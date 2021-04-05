@@ -253,7 +253,20 @@ const createManager = (request, response) => {
       })
   });
 
-    
+  const submitAnswers = (request, response) => {
+    console.log(request.body)
+    const { formId, userId, answers } = request.body
+    answers.forEach((answerObj) => {
+      const title = answerObj.title;
+      const answer = answerObj.answer;
+      pool.query('INSERT INTO answers (title, answer, formId, userId) VALUES ($1, $2, $3, $4) RETURNING id', [title, answer, formId, userId], (error, results) => {
+        if (error) {
+          throw error
+        }
+        console.log(results)
+      })
+    })
+    response.status(201).send(`Answers added successfully`)
 }
 
 const createForm = (request, response) => {
@@ -350,5 +363,6 @@ module.exports = {
     getManagerById,
     getUserById,
     changePass,
+    submitAnswers,
     logIn,
   }

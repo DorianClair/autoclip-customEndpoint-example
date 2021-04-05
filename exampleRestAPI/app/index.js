@@ -27,6 +27,7 @@ app.get('/login', jsonParser, db.logIn);
 app.post('/changepass', jsonParser, db.changePass);
 app.get('/questions', jsonParser, db.getQuestionsByFormId);
 app.post('/deleteform', jsonParser, db.deleteForm)
+app.post('/submitanswers', jsonParser, db.submitAnswers)
 app.get('/users', jsonParser, db.getUsersByManagerId);
 
 app.listen(process.env.PORT || 3000, 
