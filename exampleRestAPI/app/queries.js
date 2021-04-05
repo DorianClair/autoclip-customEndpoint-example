@@ -129,6 +129,17 @@ const getQuestionsByUserId = (request, response) =>  {
     })
 }
 
+const getUsersByFormId = (request, response) =>  {
+  console.log("formId: " + request.query.formId);
+  const formId = request.query.formId;
+  pool.query('select name, email from users inner join assignedforms on users.id = assignedforms.user_id where assignedforms.form_id = $1',[formId], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const getFormsByManagerId = (request, response) =>  {
   console.log("ManagerId: " + request.query.managerId);
   const managerId = request.query.managerId;
@@ -300,6 +311,7 @@ module.exports = {
     getFormsByManagerId,
     getFormsByUserId,
     getUsersByManagerId,
+    getUsersByFormId,
     getManagerById,
     getUserById,
     changePass,
