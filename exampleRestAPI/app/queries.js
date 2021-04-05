@@ -265,7 +265,7 @@ const createForm = (request, response) => {
 
 const updateForm = (request, response) => {
   console.log(request.body)
-  let makeForm = (deleteOldForm(createNewForm(thenAddQuestions, request)));
+  let makeForm = (deleteOldForm(createNewForm(thenAddQuestions, request), request));
   console.log("makeForm: " + makeForm)
   response.status(201).send('Form created');
 }
