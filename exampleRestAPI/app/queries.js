@@ -267,7 +267,7 @@ const createManager = (request, response) => {
       })
     })
     response.status(201).send(`Answers added successfully`)
-}
+  } 
 
 const createForm = (request, response) => {
     console.log(request.body)
@@ -364,5 +364,5 @@ module.exports = {
     getUserById,
     changePass,
     submitAnswers,
-    logIn,
-  }
+    logIn
+}}
