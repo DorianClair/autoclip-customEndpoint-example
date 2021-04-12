@@ -29,7 +29,7 @@ Now all submitted answers to that form will be POST'd to the endpoint you define
 }
 ```
 
-#LOCALLY/DEBUGGING 
+LOCALLY/DEBUGGING 
 
 If you want to run your node endpoint locally just run npm i && npm start if you are on OSX/Linux and have npm installed.
 
