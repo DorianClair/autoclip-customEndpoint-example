@@ -1,6 +1,7 @@
 const Pool = require('pg').Pool
 
 // here is an example configuration for a postgres database connection, but you will replace this with whatever database you want to store your answers in
+//DATABASE LOGIN
 const pool = new Pool({
   user: 'exampleUser', //E.G 'postgresDBUser2'
   host: 'exampleHost', //E.G 'ec2-100-24-139-146.compute-1.amazonaws.com'
