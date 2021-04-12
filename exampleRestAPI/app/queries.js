@@ -310,8 +310,8 @@ function deleteOldForm(request) {
 }
 
 function createNewForm(callback, request) {
-  const {name, description, managerId, questions, assignees } = request.body
-  pool.query('INSERT INTO forms (name, manager_id, description) VALUES ($1, $2, $3) RETURNING id', [name, managerId, description], (error, results) => {
+  const {name, description, managerId, questions, assignees, customdatasource, customendpoint } = request.body
+  pool.query('INSERT INTO forms (name, manager_id, description, customdatasource, customendpoint) VALUES ($1, $2, $3, $4, $5) RETURNING id', [name, managerId, description, customdatasource, customendpoint], (error, results) => {
       if (error) {
         throw error
       }
