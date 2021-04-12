@@ -29,7 +29,8 @@ Now all submitted answers to that form will be POST'd to the endpoint you define
 }
 ```
 
-LOCALLY/DEBUGGING 
+#LOCALLY/DEBUGGING 
+
 If you want to run your node endpoint locally just run npm i && npm start if you are on OSX/Linux and have npm installed.
 
 If you want to run the postgres database locally just download postgres & we suggest pgadmin. Run them locally and update the database credentials in queries.js to use your local credentials
