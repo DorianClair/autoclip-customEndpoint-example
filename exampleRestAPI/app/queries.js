@@ -75,6 +75,8 @@ const changePass = (request, response) => {
         bcrypt.hash(newpass, saltRounds, function(err, hash) {
           console.log("The new pass is: " + newpass);
           console.log("the new hash is: " + hash);
+          console.log("email we are updating is: " + email);
+          console.log("type is: " + type)
           if(type === "manager") {
             pool.query('UPDATE managers set pass = $2 WHERE email = $1', [email, hash], (error, results) => {
               if (error) {
