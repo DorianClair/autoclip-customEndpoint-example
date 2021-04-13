@@ -1,5 +1,5 @@
 # dorian-android-api
-NOTE: You will see linked repo's in this repo, the one you want (The one that is deployed right now) is anything under /dorian-android-api/
+NOTE: You will see linked repo's in this repo, the one you want (The one that is deployed right now) is anything under /exampleRestapi/
 
 This is a private node API that handes HTTP requests for the autoclip app to Create, Read, Update, and Delete information from a postgres database while scaling well and maintaining state
 
